@@ -19,22 +19,22 @@ from common import load_and_register_tasks
 from tvm import te
 
 def print_program(index, inp, res):
-    print("inp.task.target", inp.task.target)
+    # print("inp.task.target", inp.task.target)
     # inp.task.target = tvm.target.Target("cuda")
     inp = recover_measure_input(inp, True)
-    print("inp state", inp.state)
-    print("inp.task", inp.task)
-    print("inp.task.compute_dag", inp.task.compute_dag)
+    # print("inp state", inp.state)
+    # print("inp.task", inp.task)
+    # print("inp.task.compute_dag", inp.task.compute_dag)
     task = inp.task
     sch, args = task.compute_dag.apply_steps_from_state(inp.state)
     
     
-    with tvm.target.Target("cuda"):
-        lowered_func = tvm.lower(sch, args, name="my_kernel")
-        print("lowered_func", lowered_func)
+    # with tvm.target.Target("cuda"):
+    #     lowered_func = tvm.lower(sch, args, name="my_kernel")
+    #     print("lowered_func", lowered_func)
     
     cuda_module = tvm.build(sch, args, target="cuda", name="my_kernel")
-    print("cuda_module", cuda_module)
+    # print("cuda_module", cuda_module)
     # cuda_source_code = cuda_module.get_source("ll")
     print(cuda_module.imported_modules[0].get_source())
     # print("CUDA Source Code:", cuda_source_code)
