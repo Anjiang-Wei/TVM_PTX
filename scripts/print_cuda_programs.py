@@ -97,7 +97,7 @@ if __name__ == "__main__":
     parser.add_argument("--idx", type=int)
     args = parser.parse_args()
 
-    print("Load tasks...")
+    # print("Load tasks...")
     tasks = load_and_register_tasks()
 
     inputs, results = auto_scheduler.RecordReader(args.filename).read_lines()
