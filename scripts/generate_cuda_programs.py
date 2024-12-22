@@ -7,6 +7,8 @@ import subprocess
 import logging
 import shutil
 
+LINES_COUNT_LIMIT = 1000
+
 def setup_logging():
     logging.basicConfig(level=logging.DEBUG,
                         format="%(asctime)s - %(levelname)s - %(message)s")
@@ -35,10 +37,19 @@ def generate_cuda_program(filename, idx, output_path):
 
     try:
         result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        line_count = result.stdout.count("\n")
+        logging.info(f"Generated CUDA program has {line_count} lines")
+        if line_count > LINES_COUNT_LIMIT:
+            return False
+            
         with open(output_file, "w") as f:
             f.write(result.stdout)
         logging.info(f"CUDA program saved to: {output_file}")
         return True
+
+        # Count lines in the generated file
+
+        return line_count < 1000
     except subprocess.CalledProcessError as e:
         logging.error(f"Failed to generate CUDA program for idx-{idx}: {e.stderr}")
         return False
