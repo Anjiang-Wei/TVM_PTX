@@ -1,4 +1,4 @@
-# python3 generate_cuda_programs.py --seed 42 --num_files 200 --output_path dataset_gpu/measure_records/k80/output --max_retries 5
+# python3 generate_cuda_programs.py --seed 42 --num_files 210 --output_path dataset_gpu/measure_records/k80/output2 --max_retries 10
 
 import os
 import random
