@@ -108,7 +108,7 @@ def main():
     if len(sys.argv) < 2:
         print("Usage: python extract_pairs.py <train.jsonl> [output_dir]")
         print("Example: python extract_pairs.py train.jsonl")
-        print("Example: python extract_pairs.py train.jsonl /path/to/output")
+        print("Example: python extract_pairs.py train.jsonl CUDA")
         sys.exit(1)
     
     jsonl_file = sys.argv[1]
